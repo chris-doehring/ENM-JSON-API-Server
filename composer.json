@@ -25,7 +25,6 @@
       "Enm\\JsonApi\\Server\\Tests\\": "tests"
     }
   },
-  "minimum-stability": "stable",
   "require": {
     "php": ">=7.2",
     "ext-json": "*",
