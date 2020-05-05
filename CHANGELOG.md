@@ -3,6 +3,7 @@
 ### 4.0.0
 * fork the original package and change the composer project name
 * make the `JsonApiServer` properties protected
+* change the `enm/json-api-common` dependency to `chris-doehring/enm-json-api-common:4.0`
 
 ### 3.1.0
 * changed "set included" to "merge included"

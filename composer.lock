@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a73865879a7cf57e2de5795a54011b8",
+    "content-hash": "60562ee8a6ec0646faea3544d9bf7319",
     "packages": [
         {
             "name": "chris-doehring/enm-json-api-common",
-            "version": "dev-master",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chris-doehring/ENM-JSON-API-Common.git",
@@ -1585,9 +1585,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "chris-doehring/enm-json-api-common": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
