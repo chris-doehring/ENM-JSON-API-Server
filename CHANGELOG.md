@@ -1,5 +1,9 @@
 ## Change Log
 
+### 4.0.0
+* fork the original package and change the composer project name
+* make the `JsonApiServer` properties protected
+
 ### 3.1.0
 * changed "set included" to "merge included"
 

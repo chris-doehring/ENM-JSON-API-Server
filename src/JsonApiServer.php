@@ -27,17 +27,17 @@ class JsonApiServer
     /**
      * @var DocumentDeserializerInterface
      */
-    private $deserializer;
+    protected $deserializer;
 
     /**
      * @var DocumentSerializerInterface
      */
-    private $serializer;
+    protected $serializer;
 
     /**
      * @var RequestHandlerInterface[]
      */
-    private $handlers = [];
+    protected $handlers = [];
 
     /**
      * @param DocumentDeserializerInterface|null $deserializer

@@ -2,6 +2,8 @@ language: php
 
 php:
   - 7.2
+  - 7.3
+  - 7.4
 
 before_script:
   - composer install
@@ -10,5 +12,4 @@ script: php vendor/bin/phpunit --coverage-text
 
 notifications:
   email:
-    - bogomolov@eosnewmedia.de
-    - marien@eosnewmedia.de
+    - info@chrisdoehring.de
