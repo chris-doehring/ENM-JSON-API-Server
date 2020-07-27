@@ -9,13 +9,18 @@ use Enm\JsonApi\Exception\UnsupportedTypeException;
 use Enm\JsonApi\JsonApiTrait;
 use Enm\JsonApi\Model\Document\DocumentInterface;
 use Enm\JsonApi\Model\Error\Error;
+use Enm\JsonApi\Model\JsonApi;
 use Enm\JsonApi\Model\Request\RequestInterface;
 use Enm\JsonApi\Model\Resource\ResourceInterface;
 use Enm\JsonApi\Model\Response\DocumentResponse;
 use Enm\JsonApi\Model\Response\ResponseInterface;
+use Enm\JsonApi\Serializer\Deserializer;
 use Enm\JsonApi\Serializer\DocumentDeserializerInterface;
 use Enm\JsonApi\Serializer\DocumentSerializerInterface;
+use Enm\JsonApi\Serializer\Serializer;
 use Enm\JsonApi\Server\RequestHandler\RequestHandlerInterface;
+use Exception;
+use Throwable;
 
 /**
  * @author Philipp Marien <marien@eosnewmedia.de>
@@ -24,52 +29,30 @@ class JsonApiServer
 {
     use JsonApiTrait;
 
-    /**
-     * @var DocumentDeserializerInterface
-     */
-    protected $deserializer;
+    protected DocumentDeserializerInterface $deserializer;
+    protected DocumentSerializerInterface $serializer;
 
-    /**
-     * @var DocumentSerializerInterface
-     */
-    protected $serializer;
+    /** @var RequestHandlerInterface[] */
+    protected array $handlers = [];
 
-    /**
-     * @var RequestHandlerInterface[]
-     */
-    protected $handlers = [];
-
-    /**
-     * @param DocumentDeserializerInterface|null $deserializer
-     * @param DocumentSerializerInterface|null $serializer
-     */
     public function __construct(
         ?DocumentDeserializerInterface $deserializer = null,
         ?DocumentSerializerInterface $serializer = null
     ) {
-        $this->deserializer = $deserializer;
-        $this->serializer = $serializer;
+        $this->deserializer = $deserializer ?? new Deserializer();
+        $this->serializer = $serializer ?? new Serializer();
     }
 
-    /**
-     * @param string|null $requestBody
-     * @return DocumentInterface|null
-     */
     public function createRequestBody(?string $requestBody): ?DocumentInterface
     {
         return (string)$requestBody !== '' ?
             $this->deserializer->deserializeDocument(json_decode($requestBody, true)) : null;
     }
 
-    /**
-     * Adds a request handler
-     *
-     * @param string $type
-     * @param RequestHandlerInterface $handler
-     */
-    public function addHandler(string $type, RequestHandlerInterface $handler): void
+    public function addHandler(string $type, RequestHandlerInterface $handler): self
     {
         $this->handlers[$type] = $handler;
+        return $this;
     }
 
     /**
@@ -81,7 +64,7 @@ class JsonApiServer
      */
     public function handleRequest(RequestInterface $request): ResponseInterface
     {
-        if ($request->headers()->getRequired('Content-Type') !== 'application/vnd.api+json') {
+        if ($request->headers()->getRequired('Content-Type') !== JsonApi::CONTENT_TYPE) {
             throw new UnsupportedMediaTypeException($request->headers()->getRequired('Content-Type'));
         }
 
@@ -137,19 +120,14 @@ class JsonApiServer
     /**
      * @param ResponseInterface $response
      * @return string
+     * @throws Exception
      */
     public function createResponseBody(ResponseInterface $response): string
     {
         return $response->document() ? json_encode($this->serializer->serializeDocument($response->document())) : '';
     }
 
-    /**
-     * @param \Throwable $throwable
-     * @param bool $debug
-     *
-     * @return ResponseInterface
-     */
-    public function handleException(\Throwable $throwable, bool $debug = false): ResponseInterface
+    public function handleException(Throwable $throwable, bool $debug = false): ResponseInterface
     {
         $apiError = Error::createFrom($throwable, $debug);
 
@@ -174,14 +152,6 @@ class JsonApiServer
         return $this->handlers[$type];
     }
 
-
-    /**
-     * @param DocumentInterface $document
-     * @param ResourceInterface $resource
-     * @param RequestInterface $request
-     *
-     * @return void
-     */
     protected function includeRelated(
         DocumentInterface $document,
         ResourceInterface $resource,
@@ -200,10 +170,6 @@ class JsonApiServer
         }
     }
 
-    /**
-     * @param ResourceInterface $resource
-     * @param RequestInterface $request
-     */
     protected function cleanUpResource(ResourceInterface $resource, RequestInterface $request): void
     {
         foreach ($resource->attributes()->all() as $key => $value) {

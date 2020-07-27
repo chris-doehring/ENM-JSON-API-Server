@@ -8,6 +8,7 @@ use Enm\JsonApi\Serializer\DocumentDeserializerInterface;
 use Enm\JsonApi\Serializer\DocumentSerializerInterface;
 use Enm\JsonApi\Server\JsonApiServer;
 use PHPUnit\Framework\TestCase;
+use Exception;
 
 /**
  * @author Philipp Marien <marien@eosnewmedia.de>
@@ -29,7 +30,7 @@ class JsonApiServerTest extends TestCase
     public function testHandleException(): void
     {
         $api = $this->createJsonApiServer();
-        $e = $api->handleException(new \Exception('Test'));
+        $e = $api->handleException(new Exception('Test'));
 
         $this->assertEquals(500, $e->status());
         $this->assertEquals('application/vnd.api+json', $e->headers()->getOptional('Content-Type'));
@@ -37,9 +38,6 @@ class JsonApiServerTest extends TestCase
         $this->assertEquals('Test', $e->document()->errors()->all()[0]->title());
     }
 
-    /**
-     * @return JsonApiServer
-     */
     protected function createJsonApiServer(): JsonApiServer
     {
         /** @var DocumentDeserializerInterface $deserializer */

@@ -1,6 +1,11 @@
 JSON API Server
 ===============
-[![Build Status](https://travis-ci.org/chris-doehring/ENM-JSON-API-Server.svg?branch=master)](https://travis-ci.org/chris-doehring/ENM-JSON-API-Server)
+[![Build Status](https://travis-ci.org/chris-doehring/ENM-JSON-API-Server.svg?branch=5.x)](https://travis-ci.org/chris-doehring/ENM-JSON-API-Server)
+[![Coverage Status](https://coveralls.io/repos/github/chris-doehring/ENM-JSON-API-Server/badge.svg?branch=5.x)](https://coveralls.io/github/chris-doehring/ENM-JSON-API-Server?branch=5.x)
+[![Total Downloads](https://poser.pugx.org/chris-doehring/enm-json-api-server/downloads)](https://packagist.org/packages/chris-doehring/enm-json-api-server)
+[![Latest Stable Version](https://poser.pugx.org/chris-doehring/enm-json-api-server/v/stable)](https://packagist.org/packages/chris-doehring/enm-json-api-server)
+[![Latest Unstable Version](https://poser.pugx.org/chris-doehring/enm-json-api-server/v/unstable.png)](https://packagist.org/packages/chris-doehring/enm-json-api-server)
+[![License](https://poser.pugx.org/chris-doehring/enm-json-api-server/license)](https://packagist.org/packages/chris-doehring/enm-json-api-server)
 
 Abstract server-side php implementation of the [json api specification](http://jsonapi.org/format/).
 
@@ -13,7 +18,7 @@ composer require chris-doehring/enm-json-api-server
 ```
 
 ## Documentation
-First you should read the docs at [chris-doehring/enm-json-api-common](https://github.com/chris-doehring/ENM-JSON-API-Common/tree/master/docs) where all basic structures are defined.
+First you should read the docs at [chris-doehring/enm-json-api-common](https://github.com/chris-doehring/ENM-JSON-API-Common/tree/5.x/docs) where all basic structures are defined.
 
 1. [Json Api Server](docs/json-api-server/index.md)
     1. [Endpoints](docs/json-api-server/index.md#endpoints)
@@ -24,4 +29,4 @@ First you should read the docs at [chris-doehring/enm-json-api-common](https://g
     1. [Usage](docs/request-handler/index.md#usage)
 1. [Exception handling](docs/exception-handling/index.md)
 
-See [Change Log](CHANGELOG.md) for changes!
+See [change log](CHANGELOG.md) for changes!

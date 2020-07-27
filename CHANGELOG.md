@@ -1,5 +1,8 @@
 ## Change Log
 
+### 5.0.0
+* change the php version constraint to `^7.4` and support typed properties
+
 ### 4.0.0
 * fork the original package and change the composer project name
 * make the `JsonApiServer` properties protected
