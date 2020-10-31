@@ -1,5 +1,8 @@
 ## Change Log
 
+### 5.1.0
+* Add support for php `^8.0`
+
 ### 5.0.0
 * change the php version constraint to `^7.4` and support typed properties
 
