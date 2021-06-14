@@ -7,6 +7,8 @@ JSON API Server
 [![Latest Unstable Version](https://poser.pugx.org/chris-doehring/enm-json-api-server/v/unstable.png)](https://packagist.org/packages/chris-doehring/enm-json-api-server)
 [![License](https://poser.pugx.org/chris-doehring/enm-json-api-server/license)](https://packagist.org/packages/chris-doehring/enm-json-api-server)
 
+**This package is abandoned. Please use [`dogado/json-api-server`](https://github.com/dogado-group/json-api-server) instead.**
+
 Abstract server-side php implementation of the [json api specification](http://jsonapi.org/format/).
 
 It's based on the [original creation](https://github.com/eosnewmedia/JSON-API-Server) of the [eosnewmedia team](https://github.com/eosnewmedia) and the maintainer [Philipp Marien](https://github.com/pmarien).
